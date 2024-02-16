@@ -1,0 +1,8 @@
+{
+  "dest": "../installers/",
+  "icon": "icon.ico",
+  "options": {
+    "exe": "EasyGunLauncher.exe",
+    "noMsi": true
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Gunny01- Login</title>
+  <base href="./">
+  <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="../styles.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/login.css" />
+</head>
+<body>
+  <div class="mainContent">
+    <canvas id="backgroundCanvas" width="886" height="555"></canvas>
+    <canvas id="nhanvatCanvas" width="667" height="556"></canvas>
+    <canvas id="logoBackgroundCanvas" width="510" height="101"></canvas>
+    <canvas id="logoCanvas" width="299" height="98"></canvas>
+    <div id="closeBtnWrapper">
+      <canvas id="closeBtnCanvas" width="19" height="21"></canvas>
+    </div>
+    <div id="minimizeBtnWrapper">
+      <canvas id="minimizeBtnCanvas" width="23" height="7"></canvas>
+    </div>
+    <div id="formWrapper">
+      <div class="buttonTabs">
+        <div id="loginButtonTab" class="button active" data-target="tabLogin">Đăng nhập</div>
+        <div id="registerButtonTab" class="button" data-target="tabRegister">Đăng ký</div>
+      </div>
+      <div class="tabs">
+        <div class="tab" id="tabLogin">
+          <div class="form-group">
+            <label for="lgusername">Tài khoản:</label>
+            <input class="input" id="lgusername" />
+          </div>
+          <div class="form-group">
+            <label for="lgpassword">Mật khẩu:</label>
+            <input class="input" id="lgpassword" type="password" />
+          </div>
+          <button type="button" class="frmButton" id="btnLogin">Đăng nhập</button>
+          <p id="forgotPass">Quên mật khẩu?</p>
+          <p class="recentAccountLabel">Chọn tài khoản đã chơi</p>
+          <hr />
+          <table>
+            <thead>
+              <tr>
+                <th>Tài khoản</th>
+                <th>Đăng nhập lần cuối</th>
+              </tr>
+            </thead>
+            <tbody id="recentAccountList">
+
+            </tbody>
+          </table>
+        </div>
+        <div class="tab" id="tabRegister" style="display: none;">
+          <button type="button" class="frmButton" id="btnRegister">Đăng ký</button>
+          <div class="notice">
+            <p>*Chức năng tạm khóa. Đăng ký trên trang web.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="deleteCacheBtnWrapper">
+      <button id="deleteCache">Xóa cache</button>
+    </div>
+  </div>
+  <div id="recentAccountContextMenu" style="display: none">
+    <ul>
+      <li data-target="removeAccount" class="recentAccountContextMenuItem"><i class="fa fa-minus-circle text-danger" aria-hidden="true"></i> Xóa tài khoản</li>
+    </ul>
+  </div>
+  <div class="credit">
+    <span id="version"></span> <i class="fa fa-refresh" id="updateNow" title="Cập nhật ngay bây giờ" aria-hidden="true"></i>
+  </div>
+</body>
+</html>

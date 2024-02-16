@@ -1,0 +1,65 @@
+body {
+    width: 100vw;
+    height: 100vh;
+}
+#mainContent {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+.cardImages {
+    display: flex;
+    flex-wrap: wrap;
+}
+.cardImage {
+    flex: 0 0 25%;
+    padding: 25px 0px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: all 300ms;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+}
+.cardImage.active {
+    box-shadow: 0px 0px 4px 3px rgba(44,224,93,1);
+    -webkit-box-shadow: 0px 0px 4px 3px rgba(44,224,93,1);
+    -moz-box-shadow: 0px 0px 4px 3px rgba(44,224,93,1);
+    position: relative;
+}
+.cardImage.active:after {
+    font-family: "FontAwesome";
+    font-size: 32px;
+    content: "\f00c";
+    width: 18px;
+    height: 18px;
+    bottom: 20px;
+    right: 15px;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    color: rgba(44,224,93,1);
+}
+label {
+    font-weight: 700;
+}
+.momoAccount, .bankAccount {
+    height: 400px;
+    text-align: center;
+}
+.momoAccount img, .bankAccount img {
+    height: 100%;
+}
+.text-right {
+    text-align: right;
+}
+.text-left {
+    text-align: left;
+}
+.accinfo .row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #a1a1a352;
+}

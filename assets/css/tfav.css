@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    padding: 10px 35px;
+    font-family: "Myriad Pro";
+}
+#code {
+    margin-bottom: 15px;
+    text-align: center;
+}
+#submitter {
+    margin-bottom: 15px;
+}

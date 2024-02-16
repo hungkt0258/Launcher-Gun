@@ -1,0 +1,2 @@
+const PlayPageBarIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAATklEQVRIie3UwQ3AIAwEwTXKIx0DHdBcWkgr5kcHPj43DawsWRdvmx1YaP1NHDwclnmADxjqcGTmlYv9XDJeLofLeLkcLuPlcrjMneUCNvgjER92Edm2AAAAAElFTkSuQmCC";
+module.exports = PlayPageBarIcon;

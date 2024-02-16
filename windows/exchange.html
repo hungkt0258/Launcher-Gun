@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chuyển xu vào game</title>
+  <base href="./">
+  <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="../styles.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/exchange.css" />
+</head>
+<body>
+  <div id="mainContent">
+    <div class="alert alert-info" role="alert">
+      Hiện có: <span id="currentCoinText" class="text-success">0</span> coin
+      <div id="reloadCoin" title="Refresh"><i class="fa fa-refresh" aria-hidden="true"></i> Tải lại</div>
+    </div>
+    <div class="alert alert-info" role="alert">
+      Tỉ lệ quy đổi: 1.000 coin = <span id="exchangeCoinText" class="text-success">1.000</span> xu
+    </div>
+    <div class="row mt-3 mb-2 align-items-center">
+      <label class="col-xs-3 col-md-3" for="serverSelect">Chọn máy chủ:</label>
+      <div class="col-sm-6 col-md-6">
+        <select class="form-select form-select-lg" id="serverSelect">
+        </select>
+      </div>
+    </div>
+    <div class="row mt-3 mb-2 align-items-center">
+      <label class="col-xs-3 col-md-3" for="playerSelect">Chọn nhân vật:</label>
+      <div class="col-sm-6 col-md-6">
+        <select class="form-select form-select-lg" id="playerSelect">
+        </select>
+      </div>
+    </div>
+    <div class="row mb-3 align-items-center">
+      <label class="col-xs-3 col-md-3" for="coinAmount">Số coin muốn chuyển:</label>
+      <div class="col-sm-6 col-md-6">
+        <input class="form-control form-control-lg" type="number" min="1000" max="1000000" id="coinAmount" />
+      </div>
+      <div class="col-sm-3 col-md-3">
+        <div class="alert alert-info mb-0 pb-2 pt-2" role="alert">
+          <img src="../assets/images/xu.png" width="24" height="24"> <span id="exchangeXuText" class="text-success">0</span> xu
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" id="submitter">Chuyển xu</button>
+  </div>
+</body>
+</html>
