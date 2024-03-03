@@ -71,7 +71,8 @@ window.addEventListener('DOMContentLoaded', () => {
      * Play Ajax call
      */
     var webview = document.getElementById("gameContent");
-    webview.src = config.host + '/play2/' + localStorage.getItem('token');
+    let url = `/play2/${localStorage.getItem('token')}/${localStorage.getItem('svid')}`;
+    webview.src = config.host + url;
     webview.addEventListener('dom-ready', () => {
         webview.setAudioMuted(muted);
         // if (config.debug) {
@@ -148,7 +149,7 @@ const functions = {
     reload: function () {
         ipcRenderer.send('clearcache', {windowIndex: 'play'});
         var webview = document.getElementById("gameContent");
-        webview.src = config.host + '/play2/' + localStorage.getItem('token');
+        webview.src = config.host + '/play2/' + localStorage.getItem('token') + '/' + localStorage.getItem('svid');
         webview.addEventListener('dom-ready', () => {
             webview.setAudioMuted(muted);
         })

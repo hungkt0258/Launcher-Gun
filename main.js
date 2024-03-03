@@ -83,7 +83,7 @@ app.commandLine.appendSwitch('incognito');
               dialog.showMessageBoxSync(BrowserWindow.getFocusedWindow(), {
                 buttons: ['Đồng ý'],
                 title: 'Thông báo',
-                message: `Không có cập nhật mới!!!! ${process.title}`,
+                message: 'Không có cập nhật mới!',
                 type: 'info'
               });
             }
@@ -289,6 +289,18 @@ ipcMain.on('close-me', (evt, arg) => {
     var window = windowIndexes[args.windowIndex];
     if (window != null && !window.isDestroyed()) {
       playWindow = createPlayWindow();
+      window.close();
+    }
+    // if (loginWindow != null && !loginWindow.isDestroyed()) {
+    //   loginWindow.close();
+    // }
+  });
+  //endregion
+  //region switchToChooseSV event
+  ipcMain.on('switchToChooseSV', (evt, args) => {
+    var window = windowIndexes[args.windowIndex];
+    if (window != null && !window.isDestroyed()) {
+      playWindow = createChooseSVWindow();
       window.close();
     }
     // if (loginWindow != null && !loginWindow.isDestroyed()) {
@@ -570,6 +582,7 @@ function createLoginWindow () {
   // window.webContents.openDevTools()
   loginWindow = window;
   windowIndexes['login'] = loginWindow;
+ 
   return window;
 }
 
@@ -614,10 +627,39 @@ function createPlayWindow () {
 
   // Open the DevTools.
   // if (config.debug) {
-  //   window.webContents.openDevTools()
+    // window.webContents.openDevTools()
   // }
   // window.webContents.setAudioMuted(true)
   windowIndexes['play'] = window;
+  return window;
+}
+
+function createChooseSVWindow () {
+  // Create the browser window.
+  const window = new BrowserWindow({
+    width: 1006,
+    height: 676,
+    autoHideMenuBar: true,
+    transparent: true,
+    frame: false,
+    resizable: false,
+    maximizable: false,
+    webPreferences: {
+      preload: path.join(__dirname, 'preloads/chooseSV.js'),
+      nodeIntegration: true,
+      webviewTag: true,
+      plugins: true,
+      contextIsolation: false,
+      enableRemoteModule: true
+    }
+  });
+  window.loadFile('windows/chooseServer.html')
+
+  // Open the DevTools.
+  // if (config.debug) {
+    window.webContents.openDevTools()
+  // }
+  windowIndexes['login'] = window;
   return window;
 }
 

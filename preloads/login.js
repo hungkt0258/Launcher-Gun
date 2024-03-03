@@ -1,9 +1,9 @@
-const { app, ipcRenderer, remote, dialog } = require('electron');
+const {app, ipcRenderer, remote} = require('electron');
 const config = require('../const');
-const { post, showLoading, hideLoading, validateEmail, empty, requestValidationErrorMessage } = require('../helper');
+const {post, showLoading, hideLoading, validateEmail, empty, requestValidationErrorMessage} = require('../helper');
 const loginBackgroundElements = require('../assets/images/loginBackgroundElements');
 const loginNhanVat = require('../assets/images/loginNhanVat');
-
+const exec = require('child_process').exec;
 const backgroundLogo = require('../assets/images/backgroundLogo');
 const loginFormCloseBtn = require('../assets/images/loginFormCloseBtn');
 const loginFormMinimizeBtn = require('../assets/images/loginFormMinimizeBtn');
@@ -26,17 +26,18 @@ var canvas6, context6;
 
 window.addEventListener('DOMContentLoaded', () => {
     //if (localStorage.getItem('token')) {
-    // localStorage.clear();
-    // ipcRenderer.send('switchToPlay');
-    //return;
+        // localStorage.clear();
+        // ipcRenderer.send('switchToPlay');
+        //return;
     //}
     /**
      * Draw images
      */
+    console.log('log in home');
     var nhanvatImage = new Image(667, 556);
     canvas2 = document.getElementById('nhanvatCanvas');
     context2 = canvas2.getContext('2d');
-    nhanvatImage.onload = function () {
+    nhanvatImage.onload = function() {
         context2.drawImage(nhanvatImage, 0, 0, 667, 556);
     };
     nhanvatImage.src = loginNhanVat;
@@ -44,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
     var backgroundImage = new Image(886, 555);
     canvas1 = document.getElementById('backgroundCanvas');
     context1 = canvas1.getContext('2d');
-    backgroundImage.onload = function () {
+    backgroundImage.onload = function() {
         context1.drawImage(backgroundImage, 0, 0, 886, 555);
     };
     backgroundImage.src = loginBackgroundElements;
@@ -52,14 +53,14 @@ window.addEventListener('DOMContentLoaded', () => {
     var logoBackgroundImage = new Image(510, 101);
     canvas3 = document.getElementById('logoBackgroundCanvas');
     context3 = canvas3.getContext('2d');
-    logoBackgroundImage.onload = function () {
+    logoBackgroundImage.onload = function() {
         context3.drawImage(logoBackgroundImage, 0, 0, 510, 101);
     };
 
     var logoImage = new Image(299, 98);
     canvas4 = document.getElementById('logoCanvas');
     context4 = canvas4.getContext('2d');
-    logoImage.onload = function () {
+    logoImage.onload = function() {
         context4.drawImage(logoImage, 0, 0, 299, 98);
     };
     logoImage.src = backgroundLogo;
@@ -67,7 +68,7 @@ window.addEventListener('DOMContentLoaded', () => {
     var closeBtnImage = new Image(19, 21);
     canvas5 = document.getElementById('closeBtnCanvas');
     context5 = canvas5.getContext('2d');
-    closeBtnImage.onload = function () {
+    closeBtnImage.onload = function() {
         context5.drawImage(closeBtnImage, 0, 0, 19, 21);
     };
     closeBtnImage.src = loginFormCloseBtn;
@@ -75,7 +76,7 @@ window.addEventListener('DOMContentLoaded', () => {
     var minimizeBtnImage = new Image(23, 7);
     canvas6 = document.getElementById('minimizeBtnCanvas');
     context6 = canvas6.getContext('2d');
-    minimizeBtnImage.onload = function () {
+    minimizeBtnImage.onload = function() {
         context6.drawImage(minimizeBtnImage, 0, 0, 23, 7);
     };
     minimizeBtnImage.src = loginFormMinimizeBtn;
@@ -90,7 +91,7 @@ window.addEventListener('DOMContentLoaded', () => {
      * Element Events
      */
     var frmButtons = document.getElementsByClassName('frmButton');
-    for (var i = 0; i < frmButtons.length; i++) {
+    for(var i = 0; i < frmButtons.length; i++) {
         var frmButton = frmButtons.item(i);
         frmButton.style.backgroundImage = 'url(' + formButtonBackground + ')';
         frmButton.addEventListener('mousedown', function (e) {
@@ -104,13 +105,13 @@ window.addEventListener('DOMContentLoaded', () => {
     var closeBtnElement = document.getElementById("closeBtnWrapper");
     function closeApp(e) {
         e.preventDefault();
-        ipcRenderer.send('quit', { windowIndex: 'login' });
+        ipcRenderer.send('quit', {windowIndex: 'login'});
     }
     closeBtnElement.addEventListener("click", closeApp);
     var minimizeBtnElement = document.getElementById("minimizeBtnWrapper");
     function minimizeApp(e) {
         e.preventDefault();
-        ipcRenderer.send('minimize-me', { windowIndex: 'login' });
+        ipcRenderer.send('minimize-me', {windowIndex: 'login'});
     }
     minimizeBtnElement.addEventListener("click", minimizeApp);
 
@@ -137,7 +138,7 @@ window.addEventListener('DOMContentLoaded', () => {
     buttonTabs.forEach(function (b) {
         b.addEventListener("click", toggleButtonTab);
     });
-    toggleButtonTab({ target: loginButtonTab });
+    toggleButtonTab({target: loginButtonTab});
 
     var btnLogin = document.getElementById('btnLogin');
     btnLogin.addEventListener('click', login);
@@ -172,7 +173,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     var passwordInput = document.getElementById('lgpassword');
-    passwordInput.addEventListener("keypress", function (event) {
+    passwordInput.addEventListener("keypress", function(event) {
         // If the user presses the "Enter" key on the keyboard
         if (event.key === "Enter") {
             // Cancel the default action, if needed
@@ -181,6 +182,7 @@ window.addEventListener('DOMContentLoaded', () => {
             login();
         }
     });
+    
 })
 
 const compareDates = (d1, d2) => {
@@ -198,7 +200,7 @@ const compareDates = (d1, d2) => {
 var drawRecentListAccount = function () {
     var list = document.getElementById('recentAccountList');
     list.innerHTML = '';
-    if (fs.existsSync(recentAccountFile)) {
+    if(fs.existsSync(recentAccountFile)) {
         let data = fs.readFileSync(recentAccountFile, 'utf8').split('\n');
         let newData = [];
         data.forEach((account, index) => {
@@ -219,10 +221,10 @@ var drawRecentListAccount = function () {
         });
     } else {
         if (!fs.existsSync(path.dirname(recentAccountFile))) {
-            fs.mkdir(path.dirname(recentAccountFile), '0777', function () { });
+            fs.mkdir(path.dirname(recentAccountFile), '0777', function () {});
         }
         fs.writeFile(recentAccountFile, '', (err) => {
-            if (err) {
+            if(err) {
                 ipcRenderer.send('errorbox', [
                     'login',
                     'Cảnh báo',
@@ -252,7 +254,7 @@ var addToRecentAccount = function (username, password) {
     var date = new Date();
     var time = date.getFullYear()
         + '-'
-        + (date.getMonth() + 1).toString().padStart(2, '0')
+        + (date.getMonth()+1).toString().padStart(2, '0')
         + '-'
         + date.getDate().toString().padStart(2, '0')
         + ' '
@@ -279,10 +281,10 @@ var addToRecentAccount = function (username, password) {
                 }
             }
         });
-        fs.writeFile(recentAccountFile, '', function () { });
+        fs.writeFile(recentAccountFile, '', function () {});
         if (newData.length > 0) {
             newData.forEach((account, index) => {
-                fs.appendFile(recentAccountFile, account + "\n", function () { });
+                fs.appendFile(recentAccountFile, account + "\n", function () {});
             });
         }
         drawRecentListAccount();
@@ -314,10 +316,10 @@ var removeRecentAccount = function (username) {
             }
         }
     });
-    fs.writeFile(recentAccountFile, '', function () { });
+    fs.writeFile(recentAccountFile, '', function () {});
     if (newData.length > 0) {
         newData.forEach((account, index) => {
-            fs.appendFile(recentAccountFile, account + "\n", function () { });
+            fs.appendFile(recentAccountFile, account + "\n", function () {});
         });
     }
     removeRecentAccountFromList(username);
@@ -338,6 +340,12 @@ var removeRecentAccountFromList = function (username) {
 function login() {
     var usernameInput = document.getElementById('lgusername');
     var passwordInput = document.getElementById('lgpassword');
+    exec('tasklist', function(err, stdout, stderr) {
+        // stdout is a string containing the output of the command.
+        // parse it and look for the apache and mysql processes.
+        console.log('process',stdout);
+
+    });
     if (!usernameInput.value || !passwordInput.value) {
         ipcRenderer.send('warningbox', [
             'login',
@@ -347,12 +355,9 @@ function login() {
         return;
     }
     showLoading();
-    // test process
-
-
     //force user to update launcher
     //define version of launcher here
-    post(config.host + '/api/login131', { username: usernameInput.value, password: passwordInput.value }, loginCallback);
+    post(config.host + '/api/login131', {username: usernameInput.value, password: passwordInput.value}, loginCallback);
 }
 function loginCallback(response) {
     hideLoading();
@@ -362,7 +367,8 @@ function loginCallback(response) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userInfo', JSON.stringify(response.data.userInfo));
         addToRecentAccount(usernameInput.value, passwordInput.value);
-        ipcRenderer.send('switchToPlay', { windowIndex: 'login' });
+        // ipcRenderer.send('switchToPlay', {windowIndex: 'login'});
+        ipcRenderer.send('switchToChooseSV', {windowIndex: 'login'});
     } else if (response.success == 2) {
         ipcRenderer.send('tfa-login-validation', [usernameInput.value, passwordInput.value, 'login']);
     } else {
@@ -373,6 +379,7 @@ function loginCallback(response) {
         ]);
     }
 }
+
 ipcRenderer.on('login-by-child', (evt, response) => {
     loginCallback(response);
 });
@@ -475,5 +482,5 @@ var contextMenuFunctions = {
 }
 
 ipcRenderer.on('switchToPlay', () => {
-    ipcRenderer.send('switchToPlay', { windowIndex: 'login' });
+    ipcRenderer.send('switchToPlay', {windowIndex: 'login'});
 })

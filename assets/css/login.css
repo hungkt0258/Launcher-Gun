@@ -350,3 +350,57 @@ td {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.wrapperServer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    padding: 8px;
+    height: auto;
+    max-height: 280px;
+}
+
+.chooseTitle .button {
+    background-color: rgba(90, 67, 236, .7);
+    transition: all 300ms;
+    width: 118px;
+    height: 25px;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: "Myriad Pro";
+    font-style: italic;
+    font-weight: 300;
+    color: white;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 1px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.chooseTitle{
+    display: flex;
+    justify-content: center;
+}
+
+.serverItem{
+    width: 42%;
+    margin: 4px;
+    padding: 8px 4px;
+    border-radius: 5px;
+    font-family: "Myriad Pro";
+    font-style: italic;
+    font-weight: 600;
+    border: 1px solid #ffcc00;
+    background: ghostwhite;
+    cursor: pointer;
+}
+
+.serverItem:hover{
+    background-color: rgba(90, 67, 236, .7);
+    transition: all 300ms;
+    color: #fff;
+}
+
+
